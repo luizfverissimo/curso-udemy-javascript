@@ -6,6 +6,8 @@
   var randomNum;
   //Armazena a resposta gerada no prompt
   var response;
+  //Score
+  var score = 0;
 
   //Constructor da questões:
   function Questions(question, answers1, answers2, answers3, correctAnswer) {
@@ -14,7 +16,7 @@
     this.correctAnswer = correctAnswer;
   }
 
-  //Criação de questões
+  //Criação de questões - poderia ter armazenado em uma variável cada questão, as respostas poderia ser um array construido, dessa maneira eu só vou ter questões de 3 respostas somente!!!
   questionsPool.push(
     new Questions(
       "Qual o nome minha mãe?",
@@ -43,9 +45,9 @@
     )
   );
 
-  //Seleção de uma questão randomica de questões
+  //Seleção de uma questão randomica de questões - utilizar um for loop para mostrar as questões!!!!
   function showQuestion() {
-    randomNum = Math.floor(Math.random() * 3);
+    randomNum = Math.floor(Math.random() * questionsPool.length);
     console.log(questionsPool[randomNum].question);
     console.log(questionsPool[randomNum].answers[0]);
     console.log(questionsPool[randomNum].answers[1]);
@@ -57,7 +59,7 @@
       compare();
     }
   }
-  window.onload = showQuestion();
+  showQuestion()
 
   //Compara o valor respondido com a resposta correta e gente a resposta
   function compare() {
@@ -69,13 +71,7 @@
   }
 
   function result(result) {
-    var score = 0;
-    function scoreShow(x) {
-      score += x;
-      console.log(`Sua pontuação é de :${score}`);
-      console.log("=========================================");
-      showQuestion();
-    }
+    
 
     if (result === "right") {
       console.log(`*.*.* Parabéns! você acertou a questão! *.*.*`);
@@ -89,6 +85,13 @@
         }`
       );
       scoreShow(0);
+    }
+
+    function scoreShow(x) {
+      score += x
+      console.log(`Sua pontuação é de :${score}`);
+      console.log("=========================================");
+      showQuestion();
     }
   }
 })();
